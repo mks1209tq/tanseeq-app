@@ -40,6 +40,7 @@ class NavigationServiceProvider extends ServiceProvider
         // Register Navigation services as singletons
         $this->app->singleton(\Modules\Navigation\Services\NavigationRegistry::class);
         $this->app->singleton(\Modules\Navigation\Services\NavigationService::class);
+        $this->app->singleton(\Modules\Navigation\Services\QuickLaunchService::class);
     }
 
     /**

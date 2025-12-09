@@ -150,4 +150,32 @@ class TodoController extends Controller
         return redirect()->back()
             ->with('success', 'Todo status updated successfully.');
     }
+
+    /**
+     * Search todos for quick launch.
+     */
+    public function search(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $query = $request->input('q', '');
+        $todos = Todo::query()->where('user_id', auth()->id());
+
+        if (! empty($query)) {
+            $todos->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                  ->orWhere('description', 'like', "%{$query}%");
+            });
+        }
+
+        $todos = $todos->limit(10)->get();
+
+        return response()->json([
+            'items' => $todos->map(function ($todo) {
+                return [
+                    'id' => $todo->id,
+                    'title' => $todo->title,
+                    'description' => $todo->description,
+                ];
+            }),
+        ]);
+    }
 }

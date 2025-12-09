@@ -3,8 +3,11 @@
 namespace Modules\Navigation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Modules\Navigation\Services\NavigationService;
+use Modules\Navigation\Services\QuickLaunchService;
 
 class NavigationController extends Controller
 {
@@ -16,6 +19,48 @@ class NavigationController extends Controller
         $groupedItems = $navigationService->getGroupedItems();
 
         return view('navigation::index', compact('groupedItems'));
+    }
+
+    /**
+     * Search navigation items for quick launch.
+     */
+    public function search(Request $request, NavigationService $navigationService): JsonResponse
+    {
+        $query = $request->input('q', '');
+        $items = $navigationService->getAuthorizedItems();
+
+        if (empty($query)) {
+            return response()->json([
+                'items' => array_slice($items, 0, 10), // Return first 10 items when no query
+            ]);
+        }
+
+        $queryLower = strtolower($query);
+        $filtered = array_filter($items, function ($item) use ($queryLower) {
+            $label = strtolower($item['label'] ?? '');
+            $route = strtolower($item['route'] ?? '');
+            $group = strtolower($item['group'] ?? '');
+
+            return str_contains($label, $queryLower) ||
+                   str_contains($route, $queryLower) ||
+                   str_contains($group, $queryLower);
+        });
+
+        return response()->json([
+            'items' => array_values($filtered),
+        ]);
+    }
+
+    /**
+     * Get available models for quick launch.
+     */
+    public function getModels(QuickLaunchService $quickLaunchService): JsonResponse
+    {
+        $models = $quickLaunchService->discoverModels();
+
+        return response()->json([
+            'models' => $models,
+        ]);
     }
 
     /**

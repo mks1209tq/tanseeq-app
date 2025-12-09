@@ -3,7 +3,9 @@
 namespace Modules\Company\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Modules\Company\Entities\Company;
 use Modules\Company\Http\Requests\StoreCompanyRequest;
@@ -67,6 +69,30 @@ class CompanyController extends Controller
 
         return redirect()->route('company.index')
             ->with('success', 'Company updated successfully.');
+    }
+
+    /**
+     * Search companies for quick launch.
+     */
+    public function search(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $query = $request->input('q', '');
+        $companies = Company::query();
+
+        if (! empty($query)) {
+            $companies->where('name', 'like', "%{$query}%");
+        }
+
+        $companies = $companies->limit(10)->get();
+
+        return response()->json([
+            'items' => $companies->map(function ($company) {
+                return [
+                    'id' => $company->id,
+                    'name' => $company->name,
+                ];
+            }),
+        ]);
     }
 
     /**

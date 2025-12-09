@@ -3,6 +3,7 @@
 namespace Modules\Authentication\Entities;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
 use Modules\Authorization\Traits\HasRolesAndAuthorizations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Modules\Authentication\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRolesAndAuthorizations;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesAndAuthorizations;
 
     /**
      * The database connection name for the model.
