@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/clipboard",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Clipboard\\": "app/",
+            "Modules\\Clipboard\\Database\\Factories\\": "database/factories/",
+            "Modules\\Clipboard\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Clipboard\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "AuthorizationDebug",
+    "alias": "authorizationdebug",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AuthorizationDebug\\Providers\\AuthorizationDebugServiceProvider"
+    ],
+    "files": []
+}

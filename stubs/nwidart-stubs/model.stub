@@ -1,0 +1,34 @@
+<?php
+
+namespace $MODULE_NAMESPACE$\$MODULE$\Entities;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use $MODULE_NAMESPACE$\$MODULE$\Database\Factories\$NAME$Factory;
+
+class $CLASS$ extends Model
+{
+    use HasFactory;
+
+    /**
+     * The database connection name for the model.
+     *
+     * @var string|null
+     */
+    protected $connection = '$LOWER_NAME$';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = $FILLABLE$;
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory()
+    {
+        return $NAME$Factory::new();
+    }
+}

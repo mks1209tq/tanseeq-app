@@ -1,0 +1,11 @@
+{
+    "name": "Clipboard",
+    "alias": "clipboard",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Clipboard\\Providers\\ClipboardServiceProvider"
+    ],
+    "files": []
+}

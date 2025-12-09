@@ -1,0 +1,135 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1",
+        "nwidart/laravel-modules": "^12.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/boost": "^1.8",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.1",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Modules\\Todo\\": "Modules/Todo/app/",
+            "Modules\\Todo\\Entities\\": "Modules/Todo/app/Entities/",
+            "Modules\\Todo\\Database\\Factories\\": "Modules/Todo/database/factories/",
+            "Modules\\Todo\\Database\\Seeders\\": "Modules/Todo/database/seeders/",
+            "Modules\\Authorization\\": "Modules/Authorization/app/",
+            "Modules\\Authorization\\Entities\\": "Modules/Authorization/app/Entities/",
+            "Modules\\Authorization\\Database\\Factories\\": "Modules/Authorization/database/factories/",
+            "Modules\\Authorization\\Database\\Seeders\\": "Modules/Authorization/database/seeders/",
+            "Modules\\Authentication\\": "Modules/Authentication/app/",
+            "Modules\\Authentication\\Entities\\": "Modules/Authentication/app/Entities/",
+            "Modules\\Authentication\\Database\\Factories\\": "Modules/Authentication/database/factories/",
+            "Modules\\Authentication\\Database\\Seeders\\": "Modules/Authentication/database/seeders/",
+            "Modules\\UI\\": "Modules/UI/app/",
+            "Modules\\ConfigTransports\\": "Modules/ConfigTransports/app/",
+            "Modules\\ConfigTransports\\Entities\\": "Modules/ConfigTransports/app/Entities/",
+            "Modules\\ConfigTransports\\Database\\Factories\\": "Modules/ConfigTransports/database/factories/",
+            "Modules\\ConfigTransports\\Database\\Seeders\\": "Modules/ConfigTransports/database/seeders/",
+            "Modules\\AuthorizationDebug\\": "Modules/AuthorizationDebug/app/",
+            "Modules\\AuthorizationDebug\\Entities\\": "Modules/AuthorizationDebug/app/Entities/",
+            "Modules\\AuthorizationDebug\\Database\\Factories\\": "Modules/AuthorizationDebug/database/factories/",
+            "Modules\\AuthorizationDebug\\Database\\Seeders\\": "Modules/AuthorizationDebug/database/seeders/",
+            "Modules\\Company\\": "Modules/Company/app/",
+            "Modules\\Company\\Entities\\": "Modules/Company/app/Entities/",
+            "Modules\\Company\\Database\\Factories\\": "Modules/Company/database/factories/",
+            "Modules\\Company\\Database\\Seeders\\": "Modules/Company/database/seeders/",
+            "Modules\\Navigation\\": "Modules/Navigation/app/",
+            "Modules\\Navigation\\Entities\\": "Modules/Navigation/app/Entities/",
+            "Modules\\Navigation\\Database\\Factories\\": "Modules/Navigation/database/factories/",
+            "Modules\\Navigation\\Database\\Seeders\\": "Modules/Navigation/database/seeders/",
+            "Modules\\Clipboard\\": "Modules/Clipboard/app/",
+            "Modules\\Clipboard\\Entities\\": "Modules/Clipboard/app/Entities/",
+            "Modules\\Clipboard\\Database\\Factories\\": "Modules/Clipboard/database/factories/",
+            "Modules\\Clipboard\\Database\\Seeders\\": "Modules/Clipboard/database/seeders/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Modules\\Todo\\Tests\\": "Modules/Todo/tests/",
+            "Modules\\Authorization\\Tests\\": "Modules/Authorization/tests/",
+            "Modules\\Authentication\\Tests\\": "Modules/Authentication/tests/",
+            "Modules\\UI\\Tests\\": "Modules/UI/tests/",
+            "Modules\\AuthorizationDebug\\Tests\\": "Modules/AuthorizationDebug/tests/",
+            "Modules\\Company\\Tests\\": "Modules/Company/tests/",
+            "Modules\\Navigation\\Tests\\": "Modules/Navigation/tests/",
+            "Modules\\Clipboard\\Tests\\": "Modules/Clipboard/tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "wikimedia/composer-merge-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

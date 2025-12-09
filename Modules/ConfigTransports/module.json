@@ -1,0 +1,12 @@
+{
+    "name": "ConfigTransports",
+    "alias": "config-transports",
+    "description": "SAP-style Change and Transport System for configuration data",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ConfigTransports\\Providers\\ConfigTransportsServiceProvider"
+    ],
+    "files": []
+}
+

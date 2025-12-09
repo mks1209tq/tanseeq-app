@@ -1,0 +1,11 @@
+{
+    "name": "Navigation",
+    "alias": "navigation",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Navigation\\Providers\\NavigationServiceProvider"
+    ],
+    "files": []
+}

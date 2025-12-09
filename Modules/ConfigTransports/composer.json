@@ -1,0 +1,32 @@
+{
+    "name": "nwidart/config-transports",
+    "description": "SAP-style Change and Transport System for configuration data",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ConfigTransports\\": "app/",
+            "Modules\\ConfigTransports\\Entities\\": "app/Entities/",
+            "Modules\\ConfigTransports\\Database\\Factories\\": "database/factories/",
+            "Modules\\ConfigTransports\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ConfigTransports\\Tests\\": "tests/"
+        }
+    }
+}
+

@@ -1,0 +1,11 @@
+{
+    "Todo": true,
+    "Authorization": true,
+    "Auth": true,
+    "UI": true,
+    "Authentication": true,
+    "AuthorizationDebug": true,
+    "Company": true,
+    "Navigation": true,
+    "Clipboard": true
+}
